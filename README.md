@@ -10,11 +10,8 @@ Dieses Repository enthält die LaTeX-Projektausarbeitung zum Thema **Bloom Filte
 
 ```
 paper/
-├── main.tex              # Hauptdokument (nicht direkt bearbeiten!)
+├── main.tex              # Hauptdokument
 ├── literatur.bib         # Gemeinsames Literaturverzeichnis
-├── held_template/        # Vorlage und Beispieldateien
-│   ├── template.tex
-│   └── ...
 ├── anna/                 # Dateien von Anna
 │   └── anna.tex
 ├── kathrin/              # Dateien von Kathrin
