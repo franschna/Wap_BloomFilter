@@ -24,7 +24,7 @@ paper/
 
 ## Workflow
 
-Jede Person arbeitet **ausschließlich in ihrem eigenen Ordner**. Die eigene `.tex`-Datei wird über `\input{}` in `main.tex` eingebunden.
+Jede Person arbeitet **ausschließlich in ihrem eigenen Ordner**. Die eigene `.tex`-Datei wird über `\include{}` in `main.tex` eingebunden.
 
 Die Vorlage sowie Beispieldateien befinden sich im Ordner `held_template/` und dienen als Ausgangspunkt.
 
