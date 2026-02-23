@@ -1,0 +1,20 @@
+\section{Anwendungsbeispiele}
+\subsection{Web-Proxy-Caching}
+In verteilten Peer-to-Peer Netzwerken arbeiten mehrere Proxy-Server zusammen und tauschen sich untereinander aus. Bei einer Anfrage nach einer Webseite sucht ein Proxy zunächst im eigenen Cache, ob er diese bereits gespeichert hat. Wenn das nicht der Fall ist, spricht man von einem Cache-Miss und es wird gecheckt, ob sich die Webseite im Cache eines anderen Proxys befindet. Wird sie hier gefunden, wird die Anfrage an den entsprechenden Proxy weitergeleitet, anstatt die Seite direkt aus dem Web zu laden.
+
+Damit dieses System funktioniert, muss jeder Proxy über den Inhalt der Caches aller anderen Proxies Bescheid wissen. Um den enormen Netzwerkverkehr, der beim wiederholten Austausch der kompletten URL-Listen entstehen würde, zu vermeiden, kommen hier Bloomfilter zum Einsatz. In dem Summary Cache Protokoll tauschen Proxies periodisch Bloomfilter untereinander aus, die den Inhalt ihres Caches zusammenfassen. Wenn nun ein Cache-Miss auftritt, werden die Bloomfilter jener anderen Proxies konsultiert, die ein positives Ergebnis versprechen und die Anfrage wird entsprechend weitergeleitet. 
+
+Hierbei können False-Positives auftreten, wobei es dann zu einer minimalen Verzögerung kommt. Die massive Reduktion des Netzwerkverkehrs durch den Bloomfilter überwiegt diesen Nachteil bei Weitem. Das Summary Cache Protokoll wird beispielsweise im Web-Proxy-Cache „Squid“ eingesetzt.
+
+\subsection{Google Bigtable}
+Bloomfilter werden oft in Datenbanksystemen verwendet, wobei Google Bigtable ein bekanntes Beispiel hierfür ist. Bigtable speichert die Daten auf der Festplatte in Sorted-String-Tables (SSTables). Wenn eine Leseoperation durchgeführt werden soll, müssen potenziell mehrere dieser Tables durchsucht werden, bis die gewünschten Daten gefunden werden. Da jede Table auf der Festplatte liegt, verursacht jeder Zugriff auf eine SSTable auch einen teuren Festplattenzugriff. Besonders problematisch im Bezug auf die benötigten Ressourcen wird dies bei Abfragen nach nicht-existenten Daten.
+
+Kommen jetzt die Bloomfilter zum Einsatz, ändert sich dies drastisch. Für jede SSTable wird ein Bloomfilter im Hauptspeicher gehalten, der Auskunft über deren Inhalt gibt. Vor einem Festplattenzugriff wird also der Filter befragt, ob die gesuchten Daten in der Table enthalten sind. Bei einem positiven Ergebnis wird der Zugriff durchgeführt, ansonsten kann er eingespart werden. 
+
+\subsubsection{Beispiel Anfrage}
+Angenommen es wird eine Anfrage auf den Schlüssel $X$ gestellt und auf der Festplatte liegen drei SSTables. Ohne Verwendung von Bloomfiltern müssten alle drei Tables abgerufen und durchsucht werden, also drei Festplattenzugriffe druchgeführt werden.
+Unter Einsatz von Bloomfiltern werden jedoch zuerst diese konsultiert. Filter 1 könnte beispielsweise melden, dass Schlüssel $X$ definitiv nicht in SSTable 1 vorhanden ist, dann kann diese übersprungen werden. Filter 2 meldet jetzt das gleiche für SSTable 2, also wird diese auch übersprungen. Filter 3 sagt jetzt, dass sich $X$ in Table 3 befinden könnte – der Zugriff wird durchgeführt. 
+Demzufolge wurde nur ein Festplattenzugriff durchgeführt, bis der gesuchte Schlüssel $X$ gefunden wurde, das bedeutet eine Ersparnis von zwei Zugriffen durch die Verwendung von Bloomfiltern.
+
+\subsection{Weitere Anwendungen}
+Heute kommen Bloomfilter in zahlreichen Systemen zum Einsatz. Google Chrome nutzt sie für Safe-Browsing zur Malware-Erkennung. Verschiedene Sicherheitsdienste, unter anderem „Have I Been Pwned“, prüfen mit ihrer Hilfe, ob Passwörter kompromittiert wurden, ohne dabei die komplette Leak-Datenbank lokal speichern zu müssen. Neben Google Bigtable setzen auch weitere Datenbanksysteme, wie Apache Cassandra und LevelDB auf die Vorteile von Bloomfiltern, um unnötige Festplattenzugriffe zu vermeiden.
