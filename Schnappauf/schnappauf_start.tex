@@ -3,13 +3,14 @@
 Seien ein beliebiges Element $x$ und eine Menge $S$ gegeben. Das Membership-Problem ist eine Bezeichnung für die Fragestellung: „Ist das Element $x$ Teil der Menge $S$?“ Diese Frage tritt in vielen verschiedenen Bereichen und Anwendungen auf. Einige Beispiele dafür sind Datenbankenabfragen und URL-Caching in Web-Browsern.
 Klassische Ansätze, wie Listen, Hashtabellen oder Suchbäume liefern eine exakte Antwort auf die Frage, jedoch benötigen sie alle entsprechend viel Zeit und Speicherplatz.
 
-\subsection{Lösungsansatz}
+\subsection{Lösungsansatz - Bloomfilter}
 Bloomfilter wurden 1970 von Burton H. Bloom entwickelt, um den hohen Ressourcenbedarf zu umgehen. Sie sind probabilistische Datenstrukturen, das bedeutet sie arbeiten mit Wahrscheinlichkeiten anstatt absoluter Sicherheit. 
 
 Dabei erlauben sie False-Positives in einem begrenzten Ausmaß. Ein Filter kann also fälschlicherweise melden, das Element $x$ sei Teil der Menge $S$, auch wenn dies nicht der Fall ist. Umgekehrt sind False-Negatives jedoch ausgeschlossen. Wenn $x$ tatsächlich ein Element von $S$ ist, wird das der Filter immer korrekt erkennen. Mit anderen Worten: Ein vorhandenes Element wird nie als „nicht vorhanden“ gemeldet.
 
 \subsection{Trade-off}
-Bloomfilter balancieren drei zentrale Faktoren. Neben der Reject-Time (Zeit zur Ablehnung von Nicht-Mitgliedern) und dem benötigten Speicherplatz, die auch in konventionellen Hashing-Methoden berücksichtigt werden müssen, wird hier auch die erlaubte Fehlerrate betrachtet. Der zentrale Trade-off ist hierbei der akzeptable Anteil an False-Positives gegen die Speichereffizienz. Dieser ist bei der Implementierung eines Bloomfilters individuell konfigurierbar. 
+Bloomfilter balancieren drei zentrale Faktoren. Neben der Reject-Time (Zeit zur Ablehnung von Nicht-Mitgliedern) und dem benötigten Speicherplatz, die auch in konventionellen Hashing-Methoden berücksichtigt werden müssen, wird hier auch die erlaubte Fehlerrate betrachtet. Der zentrale Trade-off ist dabei zwischen dem akzeptablen Anteil an False-Positives und der Speichereffizienz. Dieser ist bei der Implementierung eines Bloomfilters individuell konfigurierbar. 
 
-Durch die kontrollierte Fehlerwahrscheinlichkeit wird der Speicherbedarf bedeutend reduziert, da dieser nicht von der Länge der Daten abhängt, sondern immer gleich viele Bits pro Element beträgt. Je niedriger die Fehlerrate gewählt ist, desto mehr Bits pro Element werden benötigt.
+Durch die kontrollierte Fehlerwahrscheinlichkeit wird der Speicherbedarf bedeutend reduziert, da er nicht von der Länge der Daten abhängt, sondern immer gleich viele Bits pro Element beträgt. Je niedriger die Fehlerrate gewählt ist, desto mehr Bits pro Element werden benötigt.
 Bloomfilter sind besonders hilfreich, wenn die Mehrheit der Anfragen nicht-existente Elemente betrifft – hier liefern sie schnell ein definitives „Nein“ auf die Membership-Frage.
+
