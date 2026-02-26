@@ -146,6 +146,14 @@ INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\natbib\natbib.sty
 INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\natbib\natbib.sty
 INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\float\float.sty
 INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\algorithms\algorithm.sty
+INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\algorithms\algorithm.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\base\ifthen.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\base\ifthen.sty
+INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\algorithmicx\algpseudocode.sty
+INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\algorithmicx\algpseudocode.sty
+INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\algorithmicx\algorithmicx.sty
+INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\algorithmicx\algorithmicx.sty
 INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\bookmark\bookmark.sty
 INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\bookmark\bookmark.sty
 INPUT C:\Users\FS\AppData\Roaming\MiKTeX\tex\latex\bookmark\bookmark.sty
@@ -276,6 +284,7 @@ OUTPUT Puerstinger\puerstinger.aux
 INPUT .\Puerstinger\puerstinger.tex
 INPUT .\Puerstinger\puerstinger.tex
 INPUT Puerstinger\puerstinger.tex
+INPUT C:\Program Files\MiKTeX\fonts\tfm\jknappen\ec\ecrm1000.tfm
 INPUT .\Thiele\thiele.tex
 OUTPUT Thiele\thiele.aux
 INPUT .\Thiele\thiele.tex
@@ -311,6 +320,8 @@ INPUT Thiele\thiele.aux
 INPUT .\Schnappauf\schnappauf_end.aux
 INPUT .\Schnappauf\schnappauf_end.aux
 INPUT Schnappauf\schnappauf_end.aux
+INPUT C:\Users\FS\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk
+INPUT C:\Users\FS\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk
 INPUT C:\Users\FS\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
 INPUT C:\Users\FS\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
 INPUT C:\Users\FS\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
@@ -347,3 +358,5 @@ INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb

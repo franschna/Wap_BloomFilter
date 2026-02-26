@@ -1,0 +1,120 @@
+\section{Pseudocode und Implementierung}
+Ein Bloom-Filter lässt sich mit drei grundlegenden Operationen beschreiben: Initialisierung, Einfügen und Abfragen.
+
+\subsection{Initialisierung}
+Bei der Initialisierung werden alle $m$ Bits im Array auf $0$ gesetzt und $k$ Hash-Funktionen festgelegt. Je kleiner die gewünschte Fehlerrate ist, desto größer muss $m$ gewählt werden.
+
+\begin{algorithm}
+\caption{Initialisierung eines Bloom-Filters}
+\begin{algorithmic}[1]
+\State Erzeuge Bit-Array $B[0 \dots m-1]$ und setze alle Bits auf $0$
+\State Definiere Hash-Funktionen $h_1, h_2, \dots, h_k$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Einfügen}
+Beim Einfügen wird für jedes Element $x$ eine Schleife genau $k$-mal ausgeführt. In jeder Iteration wird mithilfe der jeweiligen Hash-Funktion $h_i$ ein Index berechnet und das entsprechende Bit im Bitarray auf $1$ gesetzt. Der Modulo-Operator stellt sicher, dass der berechnete Index immer innerhalb des gültigen Bereichs von $0$ bis $m-1$ liegt. \cite{bloomJambura}
+
+\begin{algorithm}
+\caption{Einfügen eines Elements $x$}
+\begin{algorithmic}[1]
+\For{$i = 1$ \textbf{to} $k$}
+    \State $index \gets h_i(x) \bmod m$
+    \State $B[index] \gets 1$
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Abfragen}
+Für eine Abfrage werden dieselben $k$ Hash-Werte berechnet und die entsprechenden Positionen im Array überprüft. Existiert mindestens ein Bit mit dem Wert 0, kann man mit absoluter Sicherheit sagen, dass das Element nicht enthalten ist – es gibt keine False Negatives. Sind hingegen alle $k$ Bits gleich 1, gilt das Element als wahrscheinlich enthalten. Diese probabilistische Aussage ist das zentrale Merkmal des Bloom-Filters: Es sind False Positives möglich.
+
+\begin{algorithm}
+\caption{Abfrage eines Elements $x$}
+\begin{algorithmic}[1]
+\For{$i = 1$ \textbf{to} $k$}
+    \State $index \gets h_i(x) \bmod m$
+    \If{$B[index] = 0$}
+        \State \Return \textbf{FALSE}
+    \EndIf
+\EndFor
+\State \Return \textbf{TRUE}
+\end{algorithmic}
+\end{algorithm}
+
+\section{Komplexitätsanalyse}
+
+\subsection{Zeitkomplexität}
+
+Sowohl das Einfügen als auch das Abfragen eines Elements haben eine Zeitkomplexität
+von $\mathcal{O}(k)$, wobei $k$ die Anzahl der Hash-Funktionen bezeichnet.
+Entscheidend ist dabei, dass diese Zeit \emph{unabhängig} von der Anzahl~$n$
+der bereits im Filter gespeicherten Elemente ist. Der Grund
+dafür liegt in der Struktur des Filters: Es werden keine Elemente explizit
+gespeichert, sondern lediglich Bits in einem Array der Größe~$m$ gesetzt oder
+gelesen. Egal ob sich 1.000 oder 100~Millionen Elemente im Filter befinden
+-- die Abfragezeit bleibt konstant~\cite{burtonbloom}.
+
+\subsection{Speicherkomplexität}
+
+Die Speicherkomplexität beträgt $\mathcal{O}(m)$, wobei $m$ die Größe des
+Bit-Arrays ist. Im Gegensatz zu klassischen Datenstrukturen hängt dieser
+Speicherbedarf \emph{nicht} von der Größe der gespeicherten Elemente ab,
+sondern nur von zwei Faktoren: der Anzahl der zu speichernden Elemente~$n$
+und der akzeptierten False-Positive-Rate~$\varepsilon$~\cite{burtonbloom}.
+
+Als praktische Faustregel gilt: Bei einer Fehlerrate von etwa $1\,\%$ benötigt
+ein Bloom-Filter weniger als $10$~Bits pro Element. Das ist
+bemerkenswert effizient -- unabhängig davon, ob es sich bei den Elementen um
+kurze Zeichenketten oder lange URLs handelt~\cite{fan2000}.
+
+\subsection{Vergleich mit anderen Datenstrukturen}
+
+Tabelle~\ref{tab:vergleich} stellt die Komplexitätseigenschaften des
+Bloom-Filters denen einer Hash-Tabelle mit verketteten Listen sowie eines
+balancierten Baums gegenüber.
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{p{3.5cm}p{3.5cm}p{3.5cm}p{3.5cm}}
+        \hline
+        \textbf{Eigenschaft} & \textbf{Bloom-Filter} & \textbf{Hash-Tabelle mit Chaining} & \textbf{Balancierter Baum} \\
+        \hline
+        Zeitkomplexität & $\mathcal{O}(k)$ & $\varnothing\,\mathcal{O}(1)$, worst $\mathcal{O}(n)$ & $\mathcal{O}(\log n)$ \\
+        Speicherkomplexität & $\mathcal{O}(m)$ & $\mathcal{O}(n)$ & $\mathcal{O}(n)$ \\
+        Genauigkeit & Probabilistisch & Exakt & Exakt \\
+        \hline
+    \end{tabular}
+    \caption{Vergleich ausgewählter Datenstrukturen}
+    \label{tab:vergleich}
+\end{table}
+
+
+Die \textbf{Hash-Tabelle mit verketteten Listen} erreicht im Durchschnitt
+$\mathcal{O}(1)$ für Einfüge- und Suchoperationen, kann im schlechtesten Fall
+jedoch auf $\mathcal{O}(n)$ anwachsen. Da jedes Element explizit gespeichert
+wird, beträgt der Speicherbedarf $\mathcal{O}(n)$ -- typischerweise
+$64$~Bits oder mehr pro Element (Nutzdaten plus Pointer). Der wesentliche
+Vorteil liegt in der Exaktheit: Es gibt keine False Positives, und Elemente
+können jederzeit wieder abgerufen werden~\cite{Broder01012004}.
+
+Der \textbf{balancierte Baum} hat eine Zeitkomplexität von $\mathcal{O}(\log n)$
+für Suche und Einfügen. Die Laufzeit steigt mit wachsender Elementanzahl
+langsam an, da bei jedem Schritt etwa die Hälfte der verbleibenden Elemente
+verworfen wird. Der Speicherbedarf ist ebenfalls $\mathcal{O}(n)$. Der Vorteil
+liegt in der Möglichkeit, Elemente geordnet zu speichern, was zusätzliche
+Operationen wie Bereichsabfragen erlaubt~\cite{Broder01012004}.
+
+\subsection{Speichereffizienz in der Praxis}
+
+Um die Speicherersparnis greifbar zu machen, betrachten wir ein konkretes
+Beispiel: Für $100$~Millionen URLs benötigt ein Bloom-Filter bei einer
+Fehlerrate von $1\,\%$ rund $120$~Megabyte. Eine Hash-Tabelle mit denselben
+Einträgen würde hingegen über ein Gigabyte beanspruchen. Das
+ist nicht nur ein quantitativer, sondern oft ein qualitativer Unterschied --
+nämlich der zwischen einem System, das auf einem Endgerät lauffähig ist, und
+einem, das einen dedizierten Server erfordert.
+
+Dieser enorme Vorteil hat allerdings seinen Preis: Ein Bloom-Filter beantwortet
+ausschließlich die Frage \emph{,,Ist das Element möglicherweise in der
+Menge? ``} Er kann weder Elemente aufzählen noch löschen, noch gibt er die Elemente selbst zurück~\cite{bloomJambura}.

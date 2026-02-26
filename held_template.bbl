@@ -1,35 +1,76 @@
-\newcommand{\etalchar}[1]{$^{#1}$}
-\begin{thebibliography}{CDG{\etalchar{+}}08}
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Blo70]{burtonbloom}
+\bibitem[Bloom(1970)]{burtonbloom}
 Burton~H. Bloom.
 \newblock Space/time trade-offs in hash coding with allowable errors.
-\newblock {\em Commun. ACM}, 13(7):422--426, 1970.
+\newblock \emph{Commun. ACM}, 13\penalty0 (7):\penalty0 422--426, 1970.
 
-\bibitem[BM04]{Broder01012004}
+\bibitem[Tarkome et~al.(2012)Tarkome, Rothenberg, and Lagerspetz]{bloomJambura}
+Sasu Tarkome, Christian~Esteve Rothenberg, and Eemil Lagerspetz.
+\newblock Theory and practice of bloom filters for distributed systems.
+\newblock \emph{IEEE Communications Surveys \& Tutorials}, 14\penalty0
+  (1):\penalty0 131--155, 2012.
+
+\bibitem[Fan et~al.(2000)Fan, Cao, Almeida, and Broder]{fan2000}
+Li~Fan, Pei Cao, Jussara Almeida, and Andrei~Z Broder.
+\newblock Summary cache: A scalable wide-area web cache sharing protocol.
+\newblock \emph{IEEE/ACM Transactions on Networking}, 8\penalty0 (3):\penalty0
+  281--293, 2000.
+
+\bibitem[Broder and Mitzenmacher(2004)]{Broder01012004}
 Andrei Broder and Michael Mitzenmacher.
 \newblock Network applications of bloom filters: A survey.
-\newblock {\em Internet Mathematics}, 1(4):485--509, 2004.
+\newblock \emph{Internet Mathematics}, 1\penalty0 (4):\penalty0 485--509, 2004.
 
-\bibitem[CDG{\etalchar{+}}08]{bigtable}
+\bibitem[Gagniuc et~al.(2025)Gagniuc, Păvăloiu, and Dascălu]{bloomThiele}
+Paul~A. Gagniuc, Ionel-Bujorel Păvăloiu, and Maria-Iuliana Dascălu.
+\newblock Bloom filters at fifty: From probabilistic foundations to modern
+  engineering and applications.
+\newblock \emph{Algorithms}, 18:\penalty0 1--15, 2025.
+
+\bibitem[Bonomi et~al.(2006)Bonomi, Mitzenmacher, Panigrahy, Singh, and
+  Varghese]{CountingThiele}
+Flavio Bonomi, Michael Mitzenmacher, Rina Panigrahy, Sushil Singh, and George
+  Varghese.
+\newblock An improved construction for counting bloom filters.
+\newblock In \emph{Proceedings of the 14th conference on Annual European
+  Symposium on Algorithms}, pages 684--695. Springer, 2006.
+
+\bibitem[Almeida et~al.(2007)Almeida, Baquero, Preguiça, and
+  Hutchison]{ScalableThiele}
+Paulo~S. Almeida, Carlos Baquero, Nuno Preguiça, and David Hutchison.
+\newblock Scalable bloom filters.
+\newblock \emph{Information Processing Letters}, 101\penalty0 (6):\penalty0
+  255--261, 2007.
+
+\bibitem[Fan et~al.(2014)Fan, Andersen, Kaminsky, and
+  Mitzenmacher]{CuckooThiele}
+Bin Fan, David~G. Andersen, Michael Kaminsky, and Michael~D. Mitzenmacher.
+\newblock Cuckoo filter: Practically better than bloom.
+\newblock In \emph{Proceedings of the 10th ACM International Conference on
+  Emerging Networking Experiments and Technologies}, pages 179--190. ACM, 2014.
+
+\bibitem[Chang et~al.(2008)Chang, Dean, Ghemawat, Hsieh, Wallach, Burrows,
+  Chandra, Fikes, and Gruber]{bigtable}
 Fay Chang, Jeffrey Dean, Sanjay Ghemawat, Wilson~C. Hsieh, Deborah~A. Wallach,
   Mike Burrows, Tushar Chandra, Andrew Fikes, and Robert~E. Gruber.
 \newblock Bigtable: A distributed storage system for structured data.
-\newblock {\em ACM Trans. Comput. Syst.}, 26(2), 2008.
+\newblock \emph{ACM Trans. Comput. Syst.}, 26\penalty0 (2), 2008.
 
-\bibitem[GKL10]{safebrowsing}
+\bibitem[Gerbet et~al.(2010)Gerbet, Kumar, and Lauradoux]{safebrowsing}
 Thomas Gerbet, Amrit Kumar, and C{\'e}dric Lauradoux.
 \newblock (un)safe browsing.
 \newblock Technical Report RR-8594, INRIA, 2010.
 
-\bibitem[LM10]{cassandra}
+\bibitem[Lakshman and Malik(2010)]{cassandra}
 Avinash Lakshman and Prashant Malik.
 \newblock Cassandra: a decentralized structured storage system.
-\newblock {\em SIGOPS Oper. Syst. Rev.}, 44(2):35--40, 2010.
-
-\bibitem[TRL12]{bloomJambura}
-Sasu Tarkome, Christian~Esteve Rothenberg, and Eemil Lagerspetz.
-\newblock Theory and practice of bloom filters for distributed systems.
-\newblock {\em IEEE Communications Surveys \& Tutorials}, 14(1):131--155, 2012.
+\newblock \emph{SIGOPS Oper. Syst. Rev.}, 44\penalty0 (2):\penalty0 35--40,
+  2010.
 
 \end{thebibliography}
