@@ -31,15 +31,17 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-passend auszuf\"ullen
-\end{abstract}
-
 \include{Schnappauf/schnappauf_start.tex}
 \include{Jambura/jambura.tex}
 \include{Puerstinger/puerstinger.tex}
 \include{Thiele/thiele.tex}
 \include{Schnappauf/schnappauf_end.tex}
+
+\begin{abstract}
+Bloomfilter sind probabilistische Datenstrukturen, die zur effizienten Lösung des Membership-Problems entwickelt wurden. Sie basieren auf einem Bit-Array und mehreren Hashfunktionen, wodurch eine sehr hohe Speicher- und Zeiteffizienz erreicht wird, jedoch mit einer geringen, konfigurierbaren Wahrscheinlichkeit für False-Positive-Ergebnisse. Die Fehlerrate hängt dabei von Parametern wie der Größe des Bit-Arrays, der Anzahl der Hashfunktionen und der Anzahl der gespeicherten Elemente ab und stellt einen Trade-off zwischen Genauigkeit und Speicherbedarf dar. Einschränkungen wie das fehlende Löschen von Elementen und die feste Größenplanung können durch Erweiterungen wie Counting Bloom Filter oder Scalable Bloom Filter verbessert werden, während der Cuckoo Filter eine alternative Lösung darstellt. Aufgrund ihrer Effizienz kommen Bloom-Filter unter anderem in Bereichen wie Web-Caching und Datenbanksystemen zum Einsatz.
+\end{abstract}
+
+\newpage
 
 \bibliography{literatur}
 \bibliographystyle{unsrtnat}
